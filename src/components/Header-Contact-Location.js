@@ -38,6 +38,7 @@ class HeaderContactLocation extends React.Component {
             onChange={this.handleChange}
             value={this.state.location}
             autoFocus
+            onFocus={(e) => e.currentTarget.select()}
           ></input>
         </form>
       );

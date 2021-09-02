@@ -38,6 +38,7 @@ class HeaderName extends React.Component {
             onChange={this.handleChange}
             value={this.state.name}
             autoFocus
+            onFocus={(e) => e.currentTarget.select()}
           ></input>
         </form>
       );

@@ -38,6 +38,7 @@ class HeaderContactEmail extends React.Component {
             onChange={this.handleChange}
             value={this.state.email}
             autoFocus
+            onFocus={(e) => e.currentTarget.select()}
           ></input>
         </form>
       );

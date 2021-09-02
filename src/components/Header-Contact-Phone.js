@@ -38,6 +38,7 @@ class HeaderContactPhone extends React.Component {
             onChange={this.handleChange}
             value={this.state.phone}
             autoFocus
+            onFocus={(e) => e.currentTarget.select()}
           ></input>
         </form>
       );

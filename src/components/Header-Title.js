@@ -38,6 +38,7 @@ class HeaderTitle extends React.Component {
             onChange={this.handleChange}
             value={this.state.title}
             autoFocus
+            onFocus={(e) => e.currentTarget.select()}
           ></input>
         </form>
       );

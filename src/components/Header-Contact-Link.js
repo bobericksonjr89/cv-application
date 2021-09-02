@@ -42,6 +42,7 @@ class HeaderContactLink extends React.Component {
             onChange={this.handleChange}
             value={this.state.text}
             autoFocus
+            onFocus={(e) => e.currentTarget.select()}
           ></input>
           <i
             data-id={this.props.link.key}
