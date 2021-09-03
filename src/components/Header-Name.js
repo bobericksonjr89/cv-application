@@ -35,6 +35,7 @@ class HeaderName extends React.Component {
       name = (
         <form onSubmit={this.handleBlur} onBlur={this.handleBlur}>
           <input
+            className="header__name--input"
             onChange={this.handleChange}
             value={this.state.name}
             autoFocus

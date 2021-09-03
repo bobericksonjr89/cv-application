@@ -35,6 +35,7 @@ class HeaderContactEmail extends React.Component {
       email = (
         <form onSubmit={this.handleBlur} onBlur={this.handleBlur}>
           <input
+            className="header__contact-item--input"
             onChange={this.handleChange}
             value={this.state.email}
             autoFocus

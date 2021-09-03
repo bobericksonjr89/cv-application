@@ -39,6 +39,7 @@ class HeaderContactLink extends React.Component {
       link = (
         <form onSubmit={this.handleBlur} onBlur={this.handleBlur}>
           <input
+            className="header__links-item--input"
             onChange={this.handleChange}
             value={this.state.text}
             autoFocus
@@ -48,7 +49,7 @@ class HeaderContactLink extends React.Component {
             data-id={this.props.link.key}
             onMouseDown={this.handleMouseDown}
             onClick={this.props.deleteLink}
-            className="fas fa-trash"
+            className="fas fa-trash header__links-delete"
           ></i>
         </form>
       );

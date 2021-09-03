@@ -35,6 +35,7 @@ class HeaderContactPhone extends React.Component {
       phone = (
         <form onSubmit={this.handleBlur} onBlur={this.handleBlur}>
           <input
+            className="header__contact-item--input"
             onChange={this.handleChange}
             value={this.state.phone}
             autoFocus
