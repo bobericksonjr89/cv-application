@@ -31,7 +31,6 @@ class Summary extends React.Component {
   };
 
   handleAreaSize = (e) => {
-    console.log(this);
     e.target.parentNode.dataset.replicatedValue = e.target.value;
   };
 

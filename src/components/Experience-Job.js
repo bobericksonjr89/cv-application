@@ -13,16 +13,28 @@ class Job extends React.Component {
     };
   }
 
+  handleClick = (e) => {
+    const category = e.target.dataset.category;
+    if (category === "save") {
+      this.setState({
+        editing: false,
+      });
+      this.props.saveJob({
+        company: this.state.company,
+        time: this.state.time,
+        title: this.state.title,
+        description: this.state.description,
+        key: this.props.job.key,
+      });
+    }
+    if (category === "delete") {
+      this.props.deleteJob(e.target.dataset.key);
+    }
+  };
+
   handleFocus = (e) => {
     this.setState({
       editing: true,
-    });
-  };
-
-  handleBlur = (e) => {
-    e.preventDefault();
-    this.setState({
-      editing: false,
     });
   };
 
@@ -32,8 +44,8 @@ class Job extends React.Component {
     });
   };
 
-  handleMouseDown = (e) => {
-    e.preventDefault();
+  handleAreaSize = (e) => {
+    e.target.parentNode.dataset.replicatedValue = e.target.value;
   };
 
   render() {
@@ -41,49 +53,81 @@ class Job extends React.Component {
     let job;
     if (editing) {
       job = (
-        <form>
+        <form className="experience__form">
           <input
+            className="experience__company--input"
             onChange={this.handleChange}
+            data-category="company"
             value={this.state.company}
-          ></input>
-          <input onChange={this.handleChange} value={this.state.time}></input>
-          <input onChange={this.handleChange} value={this.state.title}></input>
+            autoFocus
+            onFocus={(e) => e.currentTarget.select()}
+          />
           <input
+            className="experience__time--input"
             onChange={this.handleChange}
-            value={this.state.description}
-          ></input>
+            data-category="time"
+            value={this.state.time}
+            onFocus={(e) => e.currentTarget.select()}
+          />
+          <input
+            className="experience__title--input"
+            onChange={this.handleChange}
+            data-category="title"
+            value={this.state.title}
+            onFocus={(e) => e.currentTarget.select()}
+          />
+          <div className="experience__wrap">
+            <textarea
+              className="experience__description--input"
+              onChange={this.handleChange}
+              data-category="description"
+              value={this.state.description}
+              onFocus={(e) => e.currentTarget.select()}
+              onInput={this.handleAreaSize}
+            ></textarea>
+          </div>
+          <div className="experience__icons">
+            <i
+              data-key={this.props.job.key}
+              data-category="save"
+              className="fas fa-check experience__save"
+              onClick={this.handleClick}
+            ></i>
+            <i
+              data-key={this.props.job.key}
+              data-category="delete"
+              className="fas fa-trash experience__delete"
+              onClick={this.handleClick}
+            ></i>
+          </div>
         </form>
       );
     } else {
       job = (
-        <div tabIndex="0">
+        <div tabIndex="0" className="experience__info">
           <h4
-            data-category="company"
-            onMouseDown={this.handleMouseDown}
+            className="experience__company"
             onFocus={this.handleFocus}
             onClick={this.handleFocus}
           >
             {this.state.company}
           </h4>
           <p
-            data-category="time"
-            onMouseDown={this.handleMouseDown}
+            className="experience__time"
             onFocus={this.handleFocus}
             onClick={this.handleFocus}
           >
             {this.state.time}
           </p>
           <p
-            data-category="title"
-            onMouseDown={this.handleMouseDown}
+            className="experience__title"
             onFocus={this.handleFocus}
             onClick={this.handleFocus}
           >
             {this.state.title}
           </p>
           <p
-            data-category="description"
-            onMouseDown={this.handleMouseDown}
+            className="experience__description"
             onFocus={this.handleFocus}
             onClick={this.handleFocus}
           >

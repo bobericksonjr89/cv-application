@@ -1,6 +1,7 @@
 import React from "react";
 import uniqid from "uniqid";
 import Job from "./Experience-Job";
+import "../styles/Experience.css";
 
 class Experience extends React.Component {
   constructor() {
@@ -33,9 +34,20 @@ class Experience extends React.Component {
     });
   };
 
-  deleteJob = (e) => {
-    const linkID = e.target.dataset.id;
-    const updatedJobs = this.state.jobs.filter((job) => job.key !== linkID);
+  saveJob = (job) => {
+    const updatedJobs = this.state.jobs.map((oldJob) => {
+      if (oldJob.key === job.key) {
+        oldJob = job;
+      }
+      return oldJob;
+    });
+    this.setState({
+      jobs: updatedJobs,
+    });
+  };
+
+  deleteJob = (jobKey) => {
+    const updatedJobs = this.state.jobs.filter((job) => job.key !== jobKey);
     this.setState({
       jobs: updatedJobs,
     });
@@ -43,7 +55,12 @@ class Experience extends React.Component {
 
   render() {
     const jobs = this.state.jobs.map((job) => (
-      <Job key={job.key} job={job} deleteJob={this.deleteJob} />
+      <Job
+        key={job.key}
+        job={job}
+        deleteJob={this.deleteJob}
+        saveJob={this.saveJob}
+      />
     ));
     return (
       <div>
