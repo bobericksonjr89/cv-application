@@ -1,5 +1,6 @@
 import Header from "./components/Header.js";
 import Summary from "./components/Summary.js";
+import Experience from "./components/Experience.js";
 import "./App.css";
 
 function App() {
@@ -7,6 +8,7 @@ function App() {
     <div className="App">
       <Header />
       <Summary />
+      <Experience />
     </div>
   );
 }
