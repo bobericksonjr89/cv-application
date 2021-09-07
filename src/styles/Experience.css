@@ -50,6 +50,7 @@
 .experience__form > input,
 .experience__form > textarea {
   border: none;
+  font-family: inherit;
   background-color: inherit;
   border-bottom: 1px solid #1d3557;
   width: 100%;

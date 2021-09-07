@@ -2,6 +2,7 @@ import Header from "./components/Header.js";
 import Summary from "./components/Summary.js";
 import Experience from "./components/Experience.js";
 import Education from "./components/Education.js";
+import Skills from "./components/Skills.js";
 import "./App.css";
 
 function App() {
@@ -11,6 +12,7 @@ function App() {
       <Summary />
       <Experience />
       <Education />
+      <Skills />
     </div>
   );
 }

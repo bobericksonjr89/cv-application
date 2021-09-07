@@ -1,5 +1,6 @@
 body {
   width: 90%;
+  max-width: 60rem;
   margin: 0 auto;
   font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
 }

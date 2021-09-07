@@ -32,7 +32,7 @@ class Schools extends React.Component {
     }
   };
 
-  handleFocus = (e) => {
+  handleFocus = () => {
     this.setState({
       editing: true,
     });
