@@ -1,0 +1,125 @@
+.education__header {
+  font-size: 1.5rem;
+  margin: 0.5rem 0;
+  border-bottom: 2px solid #457b9d;
+  border-top: 2px solid #457b9d;
+  font-weight: 600;
+  cursor: grabbing;
+}
+
+.education__info {
+  margin-left: 1rem;
+  font-size: 1.15rem;
+  margin-bottom: 1rem;
+}
+
+.education__info > h4,
+.education__info > p {
+  border-bottom: 1px solid transparent;
+}
+
+.education__institution {
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.education__time {
+  font-style: italic;
+  cursor: pointer;
+}
+
+.education__degree {
+  cursor: pointer;
+}
+
+.education__description {
+  margin-top: 0.5rem;
+
+  cursor: pointer;
+}
+
+.education__form {
+  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+  display: flex;
+  flex-direction: column;
+  font-size: 1.15rem;
+  margin-left: 1rem;
+  margin-bottom: 1rem;
+}
+
+.education__form > input,
+.education__form > textarea {
+  border: none;
+  background-color: inherit;
+  border-bottom: 1px solid #1d3557;
+  width: 100%;
+  padding: 0;
+}
+
+.education__form > input:focus,
+.education__form > textarea:focus {
+  outline: none;
+}
+
+.education__institution--input {
+  font-size: inherit;
+  font-weight: 600;
+  margin: 0;
+}
+
+.education__time--input {
+  font-size: inherit;
+  font-style: italic;
+  margin: 0;
+}
+
+.education__degree--input {
+  font-size: inherit;
+  margin: 0;
+}
+
+.education__wrap {
+  display: grid;
+}
+
+.education__wrap::after {
+  content: attr(data-replicated-value) " ";
+  white-space: pre-wrap;
+  visibility: hidden;
+}
+
+.education__wrap > textarea {
+  resize: none;
+  overflow: hidden;
+}
+
+.education__wrap > textarea,
+.education__wrap::after {
+  padding: 0;
+  font: inherit;
+  font-size: 1.15rem;
+
+  grid-area: 1 / 1 / 2 / 2;
+}
+
+.education__description--input {
+  border-left: none;
+  border-right: none;
+  border-top: none;
+  margin-top: 0.5rem;
+  font-size: inherit;
+  font-family: inherit;
+}
+
+.education__description--input:focus {
+  outline: none;
+}
+
+.education__save {
+  cursor: pointer;
+}
+
+.education__delete {
+  margin-left: 2rem;
+  cursor: pointer;
+}
