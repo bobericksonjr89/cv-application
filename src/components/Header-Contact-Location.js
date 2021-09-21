@@ -1,62 +1,50 @@
-import React from "react";
+import React, { useState } from "react";
 
-class HeaderContactLocation extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      location: "Location",
-      editing: false,
-    };
-  }
+const HeaderContactLocation = () => {
+  const [location, setLocation] = useState("Location");
+  const [isEditing, setIsEditing] = useState(false);
 
-  handleFocus = (e) => {
-    this.setState({
-      editing: true,
-    });
+  const handleFocus = () => {
+    setIsEditing(!isEditing);
   };
 
-  handleBlur = (e) => {
+  const handleBlur = (e) => {
     e.preventDefault();
-    this.setState({
-      editing: false,
-    });
+    setIsEditing(!isEditing);
   };
 
-  handleChange = (e) => {
-    this.setState({
-      location: e.target.value,
-    });
+  const handleChange = (e) => {
+    setLocation(e.target.value);
   };
 
-  render() {
-    const editing = this.state.editing;
-    let location;
-    if (editing) {
-      location = (
-        <form onSubmit={this.handleBlur} onBlur={this.handleBlur}>
+  if (isEditing) {
+    return (
+      <div>
+        <form onSubmit={handleBlur} onBlur={handleBlur}>
           <input
             className="header__contact-item--input"
-            onChange={this.handleChange}
-            value={this.state.location}
+            onChange={handleChange}
+            value={location}
             autoFocus
             onFocus={(e) => e.currentTarget.select()}
           ></input>
         </form>
-      );
-    } else {
-      location = (
+      </div>
+    );
+  } else {
+    return (
+      <div>
         <h2
           className="header__contact-item"
           tabIndex="0"
-          onFocus={this.handleFocus}
-          onClick={this.handleFocus}
+          onFocus={handleFocus}
+          onClick={handleFocus}
         >
-          {this.state.location}
+          {location}
         </h2>
-      );
-    }
-    return <div>{location}</div>;
+      </div>
+    );
   }
-}
+};
 
 export default HeaderContactLocation;

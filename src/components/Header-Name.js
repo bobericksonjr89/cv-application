@@ -19,26 +19,30 @@ const HeaderName = () => {
 
   if (isEditing) {
     return (
-      <form onSubmit={handleBlur} onBlur={handleBlur}>
-        <input
-          className="header__name--input"
-          onChange={handleChange}
-          value={name}
-          autoFocus
-          onFocus={(e) => e.currentTarget.select()}
-        ></input>
-      </form>
+      <div>
+        <form onSubmit={handleBlur} onBlur={handleBlur}>
+          <input
+            className="header__name--input"
+            onChange={handleChange}
+            value={name}
+            autoFocus
+            onFocus={(e) => e.currentTarget.select()}
+          ></input>
+        </form>
+      </div>
     );
   } else {
     return (
-      <h1
-        className="header__name"
-        tabIndex="0"
-        onFocus={handleFocus}
-        onClick={handleFocus}
-      >
-        {name}
-      </h1>
+      <div>
+        <h1
+          className="header__name"
+          tabIndex="0"
+          onFocus={handleFocus}
+          onClick={handleFocus}
+        >
+          {name}
+        </h1>
+      </div>
     );
   }
 };

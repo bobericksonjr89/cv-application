@@ -1,62 +1,50 @@
-import React from "react";
+import React, { useState } from "react";
 
-class HeaderTitle extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      title: "Title",
-      editing: false,
-    };
-  }
+const HeaderTitle = () => {
+  const [title, setTitle] = useState("Title");
+  const [isEditing, setIsEditing] = useState(false);
 
-  handleFocus = (e) => {
-    this.setState({
-      editing: true,
-    });
+  const handleFocus = () => {
+    setIsEditing(!isEditing);
   };
 
-  handleBlur = (e) => {
+  const handleBlur = (e) => {
     e.preventDefault();
-    this.setState({
-      editing: false,
-    });
+    setIsEditing(!isEditing);
   };
 
-  handleChange = (e) => {
-    this.setState({
-      title: e.target.value,
-    });
+  const handleChange = (e) => {
+    setTitle(e.target.value);
   };
 
-  render() {
-    const editing = this.state.editing;
-    let title;
-    if (editing) {
-      title = (
-        <form onSubmit={this.handleBlur} onBlur={this.handleBlur}>
+  if (isEditing) {
+    return (
+      <div>
+        <form onSubmit={handleBlur} onBlur={handleBlur}>
           <input
             className="header__title--input"
-            onChange={this.handleChange}
-            value={this.state.title}
+            onChange={handleChange}
+            value={title}
             autoFocus
             onFocus={(e) => e.currentTarget.select()}
           ></input>
         </form>
-      );
-    } else {
-      title = (
+      </div>
+    );
+  } else {
+    return (
+      <div>
         <h2
           className="header__title"
           tabIndex="0"
-          onFocus={this.handleFocus}
-          onClick={this.handleFocus}
+          onFocus={handleFocus}
+          onClick={handleFocus}
         >
-          {this.state.title}
+          {title}
         </h2>
-      );
-    }
-    return <div>{title}</div>;
+      </div>
+    );
   }
-}
+};
 
 export default HeaderTitle;

@@ -1,62 +1,50 @@
-import React from "react";
+import React, { useState } from "react";
 
-class HeaderContactPhone extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      phone: "Phone",
-      editing: false,
-    };
-  }
+const HeaderContactPhone = () => {
+  const [phone, setPhone] = useState("Phone");
+  const [isEditing, setIsEditing] = useState(false);
 
-  handleFocus = (e) => {
-    this.setState({
-      editing: true,
-    });
+  const handleFocus = () => {
+    setIsEditing(!isEditing);
   };
 
-  handleBlur = (e) => {
+  const handleBlur = (e) => {
     e.preventDefault();
-    this.setState({
-      editing: false,
-    });
+    setIsEditing(!isEditing);
   };
 
-  handleChange = (e) => {
-    this.setState({
-      phone: e.target.value,
-    });
+  const handleChange = (e) => {
+    setPhone(e.target.value);
   };
 
-  render() {
-    const editing = this.state.editing;
-    let phone;
-    if (editing) {
-      phone = (
-        <form onSubmit={this.handleBlur} onBlur={this.handleBlur}>
+  if (isEditing) {
+    return (
+      <div>
+        <form onSubmit={handleBlur} onBlur={handleBlur}>
           <input
             className="header__contact-item--input"
-            onChange={this.handleChange}
-            value={this.state.phone}
+            onChange={handleChange}
+            value={phone}
             autoFocus
             onFocus={(e) => e.currentTarget.select()}
           ></input>
         </form>
-      );
-    } else {
-      phone = (
+      </div>
+    );
+  } else {
+    return (
+      <div>
         <h2
           className="header__contact-item"
           tabIndex="0"
-          onFocus={this.handleFocus}
-          onClick={this.handleFocus}
+          onFocus={handleFocus}
+          onClick={handleFocus}
         >
-          {this.state.phone}
+          {phone}
         </h2>
-      );
-    }
-    return <div>{phone}</div>;
+      </div>
+    );
   }
-}
+};
 
 export default HeaderContactPhone;
