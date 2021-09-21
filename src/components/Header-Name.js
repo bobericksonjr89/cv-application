@@ -1,6 +1,49 @@
-import React from "react";
+import React, { useState } from "react";
 
-class HeaderName extends React.Component {
+const HeaderName = () => {
+  const [name, setName] = useState("Name");
+  const [isEditing, setIsEditing] = useState(false);
+
+  const handleFocus = () => {
+    setIsEditing(!isEditing);
+  };
+
+  const handleBlur = (e) => {
+    e.preventDefault();
+    setIsEditing(!isEditing);
+  };
+
+  const handleChange = (e) => {
+    setName(e.target.value);
+  };
+
+  if (isEditing) {
+    return (
+      <form onSubmit={handleBlur} onBlur={handleBlur}>
+        <input
+          className="header__name--input"
+          onChange={handleChange}
+          value={name}
+          autoFocus
+          onFocus={(e) => e.currentTarget.select()}
+        ></input>
+      </form>
+    );
+  } else {
+    return (
+      <h1
+        className="header__name"
+        tabIndex="0"
+        onFocus={handleFocus}
+        onClick={handleFocus}
+      >
+        {name}
+      </h1>
+    );
+  }
+};
+
+/* class HeaderName extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -57,6 +100,6 @@ class HeaderName extends React.Component {
     }
     return <div>{name}</div>;
   }
-}
+} */
 
 export default HeaderName;
