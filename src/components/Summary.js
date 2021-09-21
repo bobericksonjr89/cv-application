@@ -1,71 +1,58 @@
-import React from "react";
+import React, { useState } from "react";
 import "../styles/Summary.css";
 
-class Summary extends React.Component {
-  constructor() {
-    super();
+const Summary = () => {
+  const [summary, setSummary] = useState("Summary");
+  const [isEditing, setIsEditing] = useState(false);
 
-    this.state = {
-      summary: "Summary",
-      editing: false,
-    };
-  }
-
-  handleFocus = (e) => {
-    this.setState({
-      editing: true,
-    });
+  const handleFocus = () => {
+    setIsEditing(!isEditing);
   };
 
-  handleBlur = (e) => {
+  const handleBlur = (e) => {
     e.preventDefault();
-    this.setState({
-      editing: false,
-    });
+    setIsEditing(!isEditing);
   };
 
-  handleChange = (e) => {
-    this.setState({
-      summary: e.target.value,
-    });
+  const handleChange = (e) => {
+    setSummary(e.target.value);
   };
 
-  handleAreaSize = (e) => {
+  const handleAreaSize = (e) => {
     e.target.parentNode.dataset.replicatedValue = e.target.value;
   };
 
-  render() {
-    const editing = this.state.editing;
-    let summary;
-    if (editing) {
-      summary = (
-        <form onSubmit={this.handleBlur} onBlur={this.handleBlur}>
+  if (isEditing) {
+    return (
+      <div>
+        <form onSubmit={handleBlur} onBlur={handleBlur}>
           <div className="summary__wrap">
             <textarea
               className="summary--input"
-              onChange={this.handleChange}
-              value={this.state.summary}
+              onChange={handleChange}
+              value={summary}
               autoFocus
               onFocus={(e) => e.currentTarget.select()}
-              onInput={this.handleAreaSize}
+              onInput={handleAreaSize}
             ></textarea>
           </div>
         </form>
-      );
-    } else {
-      summary = (
+      </div>
+    );
+  } else {
+    return (
+      <div>
         <h2
           className="summary"
           tabIndex="0"
-          onFocus={this.handleFocus}
-          onClick={this.handleFocus}
+          onFocus={handleFocus}
+          onClick={handleFocus}
         >
-          {this.state.summary}
+          {summary}
         </h2>
-      );
-    }
-    return <div>{summary}</div>;
+      </div>
+    );
   }
-}
+};
 
 export default Summary;

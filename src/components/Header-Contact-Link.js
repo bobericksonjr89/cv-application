@@ -1,73 +1,61 @@
-import React from "react";
+import React, { useState } from "react";
 
-class HeaderContactLink extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      text: this.props.link.text,
-      editing: false,
-    };
-  }
+const HeaderContactLink = (props) => {
+  const [text, setText] = useState(props.link.text);
+  const [isEditing, setIsEditing] = useState(false);
 
-  handleFocus = (e) => {
-    this.setState({
-      editing: true,
-    });
+  const handleFocus = () => {
+    setIsEditing(!isEditing);
   };
 
-  handleBlur = (e) => {
+  const handleBlur = (e) => {
     e.preventDefault();
-    this.setState({
-      editing: false,
-    });
+    setIsEditing(!isEditing);
   };
 
-  handleChange = (e) => {
-    this.setState({
-      text: e.target.value,
-    });
+  const handleChange = (e) => {
+    setText(e.target.value);
   };
 
-  handleMouseDown = (e) => {
+  const handleMouseDown = (e) => {
     e.preventDefault();
   };
 
-  render() {
-    const editing = this.state.editing;
-    let link;
-    if (editing) {
-      link = (
-        <form onSubmit={this.handleBlur} onBlur={this.handleBlur}>
+  if (isEditing) {
+    return (
+      <div>
+        <form onSubmit={handleBlur} onBlur={handleBlur}>
           <input
             className="header__links-item--input"
-            onChange={this.handleChange}
-            value={this.state.text}
+            onChange={handleChange}
+            value={text}
             autoFocus
             onFocus={(e) => e.currentTarget.select()}
           ></input>
           <i
-            data-id={this.props.link.key}
-            onMouseDown={this.handleMouseDown}
-            onClick={this.props.deleteLink}
+            data-id={props.link.key}
+            onMouseDown={handleMouseDown}
+            onClick={props.deleteLink}
             className="fas fa-trash header__links-delete"
           ></i>
         </form>
-      );
-    } else {
-      link = (
+      </div>
+    );
+  } else {
+    return (
+      <div>
         <h2
           className="header__links-item"
           tabIndex="0"
-          onMouseDown={this.handleMouseDown}
-          onFocus={this.handleFocus}
-          onClick={this.handleFocus}
+          onMouseDown={handleMouseDown}
+          onFocus={handleFocus}
+          onClick={handleFocus}
         >
-          {this.state.text}
+          {text}
         </h2>
-      );
-    }
-    return <div>{link}</div>;
+      </div>
+    );
   }
-}
+};
 
 export default HeaderContactLink;
