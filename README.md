@@ -1,6 +1,6 @@
 # CV-Application
 
-A single-page resume or CV template application built to reinforce React props and state concepts.
+A single-page resume or CV template application built to reinforce React props and state concepts, and refactored to use functional components and hooks.
 
 ## How to Use
 
