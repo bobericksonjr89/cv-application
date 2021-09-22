@@ -1,76 +1,59 @@
-import React from "react";
+import React, { useState } from "react";
 
-class Skill extends React.Component {
-  constructor(props) {
-    super(props);
+const Skill = (props) => {
+  const [text, setText] = useState(props.text);
+  const [isEditing, setIsEditing] = useState(false);
 
-    this.state = {
-      text: this.props.text,
-      editing: false,
-    };
-  }
-
-  handleChange = (e) => {
-    this.setState({
-      text: e.target.value,
-    });
+  const handleChange = (e) => {
+    setText(e.target.value);
   };
 
-  handleFocus = () => {
-    this.setState({
-      editing: true,
-    });
+  const handleFocus = () => {
+    setIsEditing(!isEditing);
   };
 
-  handleBlur = (e) => {
+  const handleBlur = (e) => {
     e.preventDefault();
-    this.setState({
-      editing: false,
-    });
+    setIsEditing(!isEditing);
   };
 
-  handleMouseDown = (e) => {
+  const handleMouseDown = (e) => {
     e.preventDefault();
   };
 
-  render() {
-    const editing = this.state.editing;
-    let skill;
-    if (editing) {
-      skill = (
-        <form onSubmit={this.handleBlur} onBlur={this.handleBlur}>
-          <input
-            className="skills__input"
-            onChange={this.handleChange}
-            type="text"
-            value={this.state.text}
-            autoFocus
-            onFocus={(e) => e.currentTarget.select()}
-          />
-          <i
-            data-id={this.props.id}
-            onMouseDown={this.handleMouseDown}
-            onClick={this.props.deleteSkill}
-            className="fas fa-trash skills__delete"
-          ></i>
-        </form>
-      );
-    } else {
-      skill = (
-        <div>
-          <li
-            tabIndex="0"
-            className="skills__text"
-            onFocus={this.handleFocus}
-            onClick={this.handleFocus}
-          >
-            {this.state.text}
-          </li>
-        </div>
-      );
-    }
-    return skill;
+  if (isEditing) {
+    return (
+      <form onSubmit={handleBlur} onBlur={handleBlur}>
+        <input
+          className="skills__input"
+          onChange={handleChange}
+          type="text"
+          value={text}
+          autoFocus
+          onFocus={(e) => e.currentTarget.select()}
+        />
+        <i
+          data-id={props.id}
+          onMouseDown={handleMouseDown}
+          onClick={props.deleteSkill}
+          className="fas fa-trash skills__delete"
+        ></i>
+      </form>
+    );
+  } else {
+    return (
+      <div>
+        <li
+          tabIndex="0"
+          className="skills__text"
+          onFocus={handleFocus}
+          onClick={handleFocus}
+        >
+          {text}
+        </li>
+      </div>
+    );
   }
-}
+};
 
 export default Skill;
